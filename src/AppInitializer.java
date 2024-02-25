@@ -2,6 +2,7 @@ import embedded.MobileNo;
 import embedded.NameIdentifier;
 import entity.Customer;
 import entity.Order;
+import projection.CustomerProjection;
 import repository.CustomerRepository;
 
 import java.util.ArrayList;
@@ -41,12 +42,30 @@ public class AppInitializer {
 //        }
 
 
-        CustomerRepository customerRepository3
+//        CustomerRepository customerRepository3
+//                = new CustomerRepository();
+//        List<Order> ordersList = customerRepository3
+//                .getOrdersByCustomerId(1);
+//        for (Order order : ordersList) {
+//            System.out.println(order);
+//        }
+//
+//        CustomerRepository customerRepository
+//                = new CustomerRepository();
+//        List<Customer> customerList =
+//                customerRepository
+//                        .getCustomerHQL();
+//        for (Customer customer : customerList) {
+//            System.out.println(customer);
+//        }
+
+        CustomerRepository customerRepository
                 = new CustomerRepository();
-        List<Order> ordersList = customerRepository3
-                .getOrdersByCustomerId(1);
-        for (Order order : ordersList) {
-            System.out.println(order);
+        List<CustomerProjection> customerProjList
+                = customerRepository
+                .getCustomerProjection();
+        for (CustomerProjection projection : customerProjList) {
+            System.out.println(projection);
         }
 
 //        // Update

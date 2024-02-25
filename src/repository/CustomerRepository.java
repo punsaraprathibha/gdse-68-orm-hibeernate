@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+import projection.CustomerProjection;
 
 import java.util.List;
 import java.util.Objects;
@@ -107,6 +108,25 @@ public class CustomerRepository {
         Query query = session.createQuery(sql);
         query.setParameter("cus_id", cusId);
         List<Order> list = query.list();
+        session.close();
+        return list;
+    }
+
+    public List<Customer> getCustomerHQL(){
+        String sql = "FROM Customer";
+        Query query = session.createQuery(sql);
+        List<Customer> list = query.list();
+        session.close();
+        return list;
+    }
+
+    public List<CustomerProjection>
+    getCustomerProjection(){
+        String sql = "SELECT\n" +
+                "new projection.CustomerProjection(C.id, C.name)\n" +
+                "FROM Customer AS C";
+        Query query = session.createQuery(sql);
+        List list = query.list();
         session.close();
         return list;
     }
